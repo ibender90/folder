@@ -25,7 +25,7 @@ public class Player {
         return this.fleet.size() == 10; // should be 10
     }
 
-    public Ship.ShipSize checkFleet() {
+    public Ship.ShipSize checkFleet(Ship ship) {
         if (!this.fleet.isEmpty()) {
             int tinyCounter = 0;
             int smallCounter = 0;
@@ -45,14 +45,20 @@ public class Player {
                     bigCounter++;
                 }
             }
-            if (tinyCounter == 4)
-                return Ship.ShipSize.TINY;
-            if (smallCounter == 3)
-                return Ship.ShipSize.SMALL;
-            if (averageCounter == 2)
-                return Ship.ShipSize.AVERAGE;
-            if (bigCounter == 1)
-                return Ship.ShipSize.BIG;
+            switch (ship.getShipSize()) {
+                case TINY:
+                    if (tinyCounter == 4)
+                        return Ship.ShipSize.TINY;
+                case SMALL:
+                    if (smallCounter == 3)
+                        return Ship.ShipSize.SMALL;
+                case AVERAGE:
+                    if (averageCounter == 2)
+                        return Ship.ShipSize.AVERAGE;
+                case BIG:
+                    if (bigCounter == 1)
+                        return Ship.ShipSize.BIG;
+            }
         }
         return null;
     }
@@ -95,7 +101,7 @@ public class Player {
                     incorrectInput = true;
                 }
             } while (incorrectInput);
-            int[] target = {x, y};
+            int[] target = {x, y};;
             if (field.getBattleField()[y][x].equals("⚓")) {
                 System.out.println("HIT!");
                 fogOfWar.getBattleField()[y][x] = "❌";
@@ -109,8 +115,8 @@ public class Player {
                             }
                             break;
                         case SMALL:
-                            for (int j = 0; j < 5; j += 2) {
-                                if (Arrays.equals(Arrays.copyOfRange(player.getFleet().get(i).getCoordinates(), j, j + 2), target)) {
+                            for (int j = 0; j < 4; j += 2) {
+                                if (Arrays.equals(Arrays.copyOfRange(player.getFleet().get(i).getCoordinates(), j, (j + 2)), target)) {
                                     player.getFleet().get(i).getShipSize().reduceLives();
                                 }
                             }
@@ -118,11 +124,10 @@ public class Player {
                                 System.out.println("Destroyer was crushed!");
                                 player.getFleet().remove(i);
                             }
-                            System.out.println(player.toString());
                             break;
                         case AVERAGE:
-                            for (int j = 0; j < 7; j += 2) {
-                                if (Arrays.equals(Arrays.copyOfRange(player.getFleet().get(i).getCoordinates(), j, j + 2), target)) {
+                            for (int j = 0; j < 6; j += 2) {
+                                if (Arrays.equals(Arrays.copyOfRange(player.getFleet().get(i).getCoordinates(), j, (j + 2)), target)) {
                                     player.getFleet().get(i).getShipSize().reduceLives();
                                 }
                             }
@@ -130,16 +135,17 @@ public class Player {
                                 System.out.println("Cruiser is in history!");
                                 player.getFleet().remove(i);
                             }
-                            System.out.println(player.toString());
                             break;
                         case BIG:
-                            for (int j = 0; j < 9; j += 2) {
-                                if (Arrays.equals(Arrays.copyOfRange(player.getFleet().get(i).getCoordinates(), j, j + 2), target)) {
+                            for (int j = 0; j < 8; j += 2) {
+                                if (Arrays.equals(Arrays.copyOfRange(player.getFleet().get(i).getCoordinates(), j, (j + 2)), target)) {
                                     player.getFleet().get(i).getShipSize().reduceLives();
                                 }
                             }
-                            if (player.getFleet().get(i).getShipSize().getLives() == 0)
+                            if (player.getFleet().get(i).getShipSize().getLives() == 0) {
                                 System.out.println("Airplane carrier is under water");
+                                player.getFleet().remove(i);
+                            }
                             break;
                     }
             } else {

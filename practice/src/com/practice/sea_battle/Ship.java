@@ -19,6 +19,7 @@ public class Ship {
         return coordinates;
     }
 
+
     public void setCoordinates(int[] coordinates) {
         this.coordinates = coordinates;
     }

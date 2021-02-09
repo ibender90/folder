@@ -22,22 +22,36 @@ public class CompareMe {
                 deck.add(new Card(suit, face));
         }
 
-        System.out.println("Original deck \n");
-        for (int i = 0; i < deck.size(); i++) {
-            System.out.printf("%-20s %s", deck.get(i), (i + 1) % 4 == 0 ? "\n" : "  "); // на каждом четвёртом элементе переходим на новую строку
-        }
+        Collections.sort(deck);
+        Card myCard = new Card(Card.Suit.SPADES, Card.Face.QUEEN); // queen of spades
+        int i = Collections.binarySearch(deck, myCard); //binary search работает только в отсортированном списке
+        if (i >= 0)
+            System.out.println("This card was found at position: " + i);
+        else System.out.println(myCard + "is not here");
+
+        List<Card> cardList = new ArrayList<>(deck); //кладём все элементы списка deck  в новый список cardList
+        Collections.addAll(cardList, myCard,myCard); // добавляю ещё пару карт queen of spades
+        int frequency = Collections.frequency(cardList, myCard); // чтобы работал этот метод нужно сгенерировать в классе Card методы equals и hashcode
+        System.out.println("This deck now contains "+ frequency+" "+myCard);
+
+       // System.out.println("Original deck \n");
+      //  printDeck(deck);
         System.out.println("\n\n\n");
 
         Collections.shuffle(deck);
-        System.out.println("shuffled deck \n");
-        for (int i = 0; i < deck.size(); i++) {
-            System.out.printf("%-20s %s", deck.get(i), (i + 1) % 4 == 0 ? "\n" : "  ");
-        }
+      //  System.out.println("shuffled deck \n");
+       // printDeck(deck);
 
-        Collections.sort(deck); //сортируем согласно методу, который реализован и переопределён в классе card
+        //Collections.sort(deck); //сортируем согласно методу, который реализован и переопределён в классе card
         // можно вызвать .reverseorder для сортировки в обратном порядке
         // Collections.sort(deck, Comparator.reverseOrder());
         System.out.println("sorted deck \n");
+       // printDeck(deck);
+
+
+    }
+
+    private static void printDeck(List<Card> deck) {
         for (int i = 0; i < deck.size(); i++) {
             System.out.printf("%-20s %s", deck.get(i), (i + 1) % 4 == 0 ? "\n" : "  ");
         }
@@ -84,6 +98,19 @@ public class CompareMe {
         @Override
         public String toString() {
             return face + " of " + suit;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Card card = (Card) o;
+            return suit == card.suit && face == card.face;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(suit, face);
         }
     }
 }
