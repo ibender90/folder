@@ -91,7 +91,7 @@ public class Player {
                     System.out.println("Please try again");
                     incorrectInput = true;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("battle field has a size 10x10");
+                    System.out.println("cant apply this coordinates");
                     incorrectInput = true;
                 }
             } while (incorrectInput);
@@ -139,7 +139,7 @@ public class Player {
                                 }
                             }
                             if (player.getFleet().get(i).getShipSize().getLives() == 0)
-                                System.out.println("Destroyer is at the botoom");
+                                System.out.println("Airplane carrier is under water");
                             break;
                     }
             } else {

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ship {
-    private static Scanner scanner = new Scanner(System.in);
     private int[] coordinates;
     private ShipSize shipSize;
 
@@ -62,27 +61,18 @@ public class Ship {
         switch (usersInput) {
             case 1:
                 Ship ship1 = new Ship(ShipSize.TINY);
-                ship1.coordinates = ship1.setDefaultCoordinates(ShipSize.TINY);
                 return ship1;
             case 2:
                 Ship ship2 = new Ship(ShipSize.SMALL);
-                ship2.coordinates = ship2.setDefaultCoordinates(ShipSize.SMALL);
                 return ship2;
             case 3:
                 Ship ship3 = new Ship(ShipSize.AVERAGE);
-                ship3.coordinates = ship3.setDefaultCoordinates(ShipSize.AVERAGE);
                 return ship3;
             case 4:
                 Ship ship4 = new Ship(ShipSize.BIG);
-                ship4.coordinates = ship4.setDefaultCoordinates(ShipSize.BIG);
                 return ship4;
         }
         return null;
-    }
-
-    private int[] setDefaultCoordinates(ShipSize size) {
-        int[] emptyCoordinates = new int[size.getLives() * 2];
-        return emptyCoordinates;
     }
 
     public boolean correctShape() { // когда корабль не является одной целой линией на карте, расположеной вертикально или горизонтально
@@ -119,6 +109,7 @@ public class Ship {
     }
 
     public int[] defineCoordinates() {
+        Scanner scanner = new Scanner(System.in);
         int[] position = new int[this.shipSize.getLives() * 2]; // одна клетка имеет две координаты, для разного размера корабля - разный размер массива содержащий координаты на поле
         boolean incorrectInput;
         do {

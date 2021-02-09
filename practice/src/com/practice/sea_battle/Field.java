@@ -9,13 +9,22 @@ public class Field {
 
     public boolean addToField(Ship ship) {
         for (int i = 0; i < ship.getCoordinates().length - 1; i += 2) { //сначала поверяю, что каждая кретка поля свободна
-            if (!battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]].equals(Icon.EMPTY.icon)) // добавляет корабль на карту только если клетки свободнф
+            if (!battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]].equals(Icon.EMPTY.icon))
                 return false;
         }
         for (int i = 0; i < ship.getCoordinates().length - 1; i += 2) { // затем заполняю эти клетки строками со значком корабля
-            battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]] = Icon.SHIP.icon;
+            battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]] = Icon.SHIP.icon;  // добавляет корабль на карту
         }
         return true;
+    }
+
+    public void addRemainingFleet(Field field){
+        for (int i = 0; i < this.battleField.length; i++) {
+            for (int j = 0; j < this.battleField[i].length; j++) {
+                if (field.battleField[i][j].equals(Icon.SHIP.icon) && this.battleField[i][j].equals(Icon.EMPTY.icon))
+                    this.battleField[i][j] = Icon.SHIP.icon;
+            }
+        }
     }
 
     public void generateBlockedArea(Ship ship) { // создаст зону вокруг нового корабля в которую нельзя будет поставить новые корабли
@@ -109,10 +118,6 @@ public class Field {
             }
             System.out.println();
         }
-    }
-
-    public void setBattleField(String[][] battleField) {
-        this.battleField = battleField;
     }
 
     public String[][] getBattleField() {
