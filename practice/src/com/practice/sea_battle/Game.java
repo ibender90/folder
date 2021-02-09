@@ -72,7 +72,7 @@ public class Game {
                 }
             } while (incorrectInput);
             Ship testShip = Ship.createShip(shipType); // создаю корабль нужного размера без определённых координат
-            if (testShip.getShipSize() == player.checkFleet()) { //если размер созданного корабля совпадает с максимальным количеством таких во флоте
+            if (testShip.getShipSize() == player.checkFleet()) { //если размер созданного корабля совпадает с максимальным количеством
                 System.out.println("fleet can not contain more vessels of this size");  //если кораблей такого размера уже слишком много во флоте игрока, то он не добавляется
                 continue;
             } else testShip.getInstruction();
