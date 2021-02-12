@@ -2,7 +2,8 @@ package com.practice.fourteen_read_file.errors.read_file_throw_exception;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
+
 
 public class WordCounter {
     public static void main(String[] args) {
@@ -28,23 +29,35 @@ public class WordCounter {
 //        for(String element: words){
 //            numbers[counter++] = Integer.parseInt(element); //если мы знаем, что файл содержит только целые числа, можем получить массив чисел из массива строк
 //        }
-        int length = 0;
+        int amountOfWords = 0;
+        int amountOfNumbers = 0;
         while (scanner.hasNextLine()) {
             String scannedLines = scanner.nextLine();
-            String[] words = scannedLines.split(" ");
-            length += words.length; //+= потому, что каждую строку массив обновляется
-            for (String element : words) {
-                switch (element) {
-                    case "!", "?", ",", ":", ";", "-" -> length--;
+            String[] line = scannedLines.split(" ");
+            amountOfWords += line.length; //+= потому, что каждую строку массив обновляется
+
+            for (String word : line) {
+                if (isNumber(word)){
+                    amountOfWords--;
+                } //уменьшу счётчик слов если встречу число
+                switch (word) {
+                    case "!", "?", ",", ":", ";", "-" -> amountOfWords--; // проверяю не попался ли мне просто отдельный знак препинания
                 }
-            }
-        }
+        }}
         scanner.close();
 
-        System.out.println(length);
-//        System.out.println(Arrays.toString(words));
-//        System.out.println(Arrays.toString(numbers));
+       // System.out.println(amountOfWords);
+        System.out.println((isNumber("1,76")));
 
+
+    }
+
+    public static boolean isNumber(String str) {
+        if (str == null || str.isEmpty()) return false;
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) return false;
+        }
+        return true;
     }
 }
 

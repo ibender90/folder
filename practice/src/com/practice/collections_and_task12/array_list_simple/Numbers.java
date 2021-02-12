@@ -1,4 +1,4 @@
-package com.practice.collections_task12;
+package com.practice.collections_and_task12.array_list_simple;
 
 import java.util.ArrayList;
 import java.util.List;

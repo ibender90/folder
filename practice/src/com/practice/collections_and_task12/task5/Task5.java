@@ -1,4 +1,4 @@
-package com.practice.collections_task12.task5;
+package com.practice.collections_and_task12.task5;
 //Выполнять в подпапке task5 в day12 *
 //        Скопировать MusicBand из прошлого задания и доработать - теперь у участника
 //        музыкальной группы есть не только имя, но и возраст. Соответственно, теперь под

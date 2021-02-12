@@ -1,4 +1,4 @@
-package com.practice.collections_task12.task5;
+package com.practice.collections_and_task12.task5;
 
 public class Artist {
     private String name;

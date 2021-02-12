@@ -1,4 +1,4 @@
-package com.practice.collections_task12.task4;
+package com.practice.collections_and_task12.task4;
 
 public class Task4 {
     public static void main(String[] args) {

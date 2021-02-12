@@ -1,4 +1,4 @@
-package com.practice.collections_task12.task3MusicBands;
+package com.practice.collections_and_task12.task3MusicBands;
 
 import java.util.ArrayList;
 import java.util.Collections;

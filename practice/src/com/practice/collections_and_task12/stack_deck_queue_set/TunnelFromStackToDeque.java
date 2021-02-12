@@ -1,10 +1,10 @@
-package com.practice.stack_deck_queue_set;
+package com.practice.collections_and_task12.stack_deck_queue_set;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Stack;
 
-public class Tunnel {
+public class TunnelFromStackToDeque {
     public static void main(String[] args) {
         Stack<Vagon> trainGarage = new Stack<>();
 

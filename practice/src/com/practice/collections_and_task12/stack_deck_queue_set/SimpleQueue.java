@@ -1,6 +1,6 @@
-package com.practice.stack_deck_queue_set;
+package com.practice.collections_and_task12.stack_deck_queue_set;
 
-import com.practice.collections_task12.compare.Card;
+import com.practice.collections_and_task12.compare.Card;
 
 import java.util.PriorityQueue;
 import java.util.Queue;

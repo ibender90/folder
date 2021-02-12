@@ -1,4 +1,4 @@
-package com.practice.collections_task12.task3MusicBands;
+package com.practice.collections_and_task12.task3MusicBands;
 //Создать класс Музыкальная Группа (англ. MusicBand ) с полями name и year
 //        (название музыкальной группы и год основания). Создать 10 или более экземпляров
 //        класса MusicBand , добавить их в список (выбирайте такие музыкальные группы,

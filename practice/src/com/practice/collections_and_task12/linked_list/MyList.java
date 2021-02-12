@@ -1,4 +1,4 @@
-package com.practice.collections_task12.linked_list;
+package com.practice.collections_and_task12.linked_list;
 
 import java.util.Iterator;
 import java.util.LinkedList;

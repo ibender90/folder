@@ -1,4 +1,4 @@
-package com.practice.collections_task12.compare;
+package com.practice.collections_and_task12.compare;
 
 import java.util.*;
 

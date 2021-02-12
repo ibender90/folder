@@ -1,9 +1,9 @@
-package com.practice.stack_deck_queue_set;
+package com.practice.collections_and_task12.stack_deck_queue_set;
 
 import java.util.*;
 
 
-public class SetRunner {
+public class HashSetTypes {
     public static void main(String[] args) {
         String[] cars1 = {"Lada", "Ural", "Zil", "BMW"};
         String[] cars2 = {"BMW", "Audi", "Mercedes", "Ural"};
