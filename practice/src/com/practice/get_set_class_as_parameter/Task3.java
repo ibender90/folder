@@ -1,6 +1,4 @@
-package com.practice.sixth;
-
-import java.util.Random;
+package com.practice.get_set_class_as_parameter;
 
 //Создать класс Teacher (Преподаватель), имеющий поля “Имя”, “Предмет”. Создать
 //        класс Student (Студент) с полем “Имя”.

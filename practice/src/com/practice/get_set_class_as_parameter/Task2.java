@@ -1,4 +1,4 @@
-package com.practice.sixth;
+package com.practice.get_set_class_as_parameter;
 
 //2. Создать класс Самолет ( Airplane ) с полями:
 //        - producer (изготовитель)

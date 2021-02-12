@@ -1,4 +1,4 @@
-package com.practice.eight;
+package com.practice.string_builder_and_time_measurement;
 
 //Скопируйте класс Самолет из задания дня 6.
 //        Внесите изменения в класс таким образом, чтобы следующий код выводил

@@ -1,4 +1,4 @@
-package com.practice.sixth;
+package com.practice.get_set_class_as_parameter;
 
 //2. Создать класс Мотоцикл (англ. Motorbike ), с полями “Год выпуска”, “Цвет”,
 //        “Модель”. Создать экземпляр класса Мотоцикл, с помощью конструктора (сеттеры не

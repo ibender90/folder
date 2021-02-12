@@ -1,4 +1,4 @@
-package com.practice.sixth;
+package com.practice.get_set_class_as_parameter;
 
 public class Airplane {
 

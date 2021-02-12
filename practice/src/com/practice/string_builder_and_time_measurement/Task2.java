@@ -1,4 +1,4 @@
-package com.practice.eight;
+package com.practice.string_builder_and_time_measurement;
 
 public class Task2 {
     public static void main(String[] args) {

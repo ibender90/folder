@@ -37,27 +37,31 @@ public class WordCounter {
             amountOfWords += line.length; //+= потому, что каждую строку массив обновляется
 
             for (String word : line) {
-                if (isNumber(word)){
+                if (isNumber(word)) {
                     amountOfWords--;
                 } //уменьшу счётчик слов если встречу число
                 switch (word) {
                     case "!", "?", ",", ":", ";", "-" -> amountOfWords--; // проверяю не попался ли мне просто отдельный знак препинания
                 }
-        }}
+            }
+        }
         scanner.close();
 
-       // System.out.println(amountOfWords);
-        System.out.println((isNumber("1,76")));
-
-
+        System.out.println(amountOfWords);
+        //System.out.println((isNumber("444")));
     }
-
     public static boolean isNumber(String str) {
-        if (str == null || str.isEmpty()) return false;
-        for (int i = 0; i < str.length(); i++) {
-            if (!Character.isDigit(str.charAt(i))) return false;
+        if (str == null || str.isEmpty()) {
+            return false;
         }
-        return true;
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.isDigit(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
     }
+
+
 }
 
