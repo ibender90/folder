@@ -36,11 +36,6 @@ public class TunnelFromStackToDeque {
 
     }
 
-
-
-
-
-
     public static class Vagon {
         private static int vagonNumber = 1;
         private String vagonCargo;

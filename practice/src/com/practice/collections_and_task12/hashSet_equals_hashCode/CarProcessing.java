@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class CarProcessing {
     public static void main(String[] args) {
-        Set<Car> firstCollection = new HashSet<>();
+        Set<Car> firstCollection = new HashSet<>(); // set это множество неповторяющихся элементов
         firstCollection.add(new Car("BMW", "120D", 15));
         firstCollection.add(new Car("Toyota", "Corolla", 10));
         firstCollection.add(new Car("Volvo", "XC90", 40));
@@ -22,7 +22,7 @@ public class CarProcessing {
         //printer(uniqueCollection);
 
 //        firstCollection.retainAll(secondCollection);   2
-//        uniqueCollection.removeAll(firstCollection);   3  действия для получения только тех элементов, которые уникальны дья обоих множеств
+//        uniqueCollection.removeAll(firstCollection);   3  действия для получения только тех элементов, которые уникальны для обоих множеств
 //        printer(uniqueCollection);
 
         //работа с множествами
