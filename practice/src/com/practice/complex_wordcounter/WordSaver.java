@@ -31,6 +31,7 @@ public class WordSaver {
     }
 
     public static void simplePrint(Map<String, Integer> map) {
+        System.out.printf("%-15s%-10s \n", "word", "counter");
         Map<String, Integer> wordsAsTreeMap = new TreeMap<>(map); //создаю мап в виде дерева и передаю туда мап с полученными из сканера парами для сортировки (в случае с ключом типа String сортировка будет по алфавиту)
         Set<String> keys = wordsAsTreeMap.keySet(); // записываю в сет все ключи
         for (String key : keys) {
