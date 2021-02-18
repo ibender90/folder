@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class InputProcessing { //if I have a text file on my desktop, I can give its name to this class
+public class FileReader { //if I have a text file on my desktop, I can give its name to this class
     public static Scanner fileFromDesktop() {
         String separator = File.separator;
         Scanner nameScanner = new Scanner(System.in);

@@ -1,8 +1,9 @@
 package com.practice.collections_and_task12.tree_map_average_grades;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SubjectGrade { // класс для создания мап предмет-оценка
+public class SubjectGrade implements Serializable { // класс для создания мап предмет-оценка
     private final String subjectName;
     private final int grade;
 

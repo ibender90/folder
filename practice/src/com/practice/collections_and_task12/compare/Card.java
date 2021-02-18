@@ -9,14 +9,26 @@ public class Card implements Comparable<Card> { // реализуем интер
     private final Suit suit;
     private final Face face;
 
-    public enum Suit {SPADES, HEARTS, CLUBS, DIAMONDS}
+    public enum Suit {SPADES('S'), HEARTS('H'), CLUBS('C'), DIAMONDS('D');
+        public char shortName;
+        Suit(char shortName){
+            this.shortName = shortName;
+        }
+    }
 
-    public enum Face {ACE, DEUCE, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING}
+    public enum Face { DEUCE('2'), THREE('3'), FOUR('4'), FIVE('5'), SIX('6'), SEVEN('7'), EIGHT('8'),
+        NINE('9'), TEN('T'), JACK('J'), QUEEN('Q'), KING('K'), ACE('A');
+        public char shortName;
+        Face(char shortName){
+            this.shortName = shortName;
+        }}
 
     public Card(Suit suit, Face face) {
         this.suit = suit;
         this.face = face;
     }
+
+
 
     @Override
     public int compareTo(Card cardToCompare) {

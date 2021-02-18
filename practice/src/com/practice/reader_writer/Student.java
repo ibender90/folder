@@ -1,0 +1,32 @@
+package com.practice.reader_writer;
+
+import com.practice.collections_and_task12.tree_map_average_grades.SubjectGrade;
+
+import java.io.Serializable;
+import java.util.Set;
+
+public class Student implements Serializable { //класс создан для демонстрации способа сохранения объектов
+    //Serializable интерфейс нужен для записи объектов этого класса
+    private String name;
+    private float averageGrade;
+    private Set<SubjectGrade> grades;
+
+    public Student(String name, float averageGrade, Set<SubjectGrade> grades) {
+        this.name = name;
+        this.averageGrade = averageGrade;
+        this.grades = grades;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getAverageGrade() {
+        return averageGrade;
+    }
+
+    public Set<SubjectGrade> getGrades() {
+        return grades;
+    }
+
+}

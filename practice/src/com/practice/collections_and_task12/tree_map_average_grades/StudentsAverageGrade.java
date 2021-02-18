@@ -1,10 +1,12 @@
 package com.practice.collections_and_task12.tree_map_average_grades;
 
-public class AverageStudentsGrade implements Comparable<AverageStudentsGrade>{ //класс для сортировки объектов по полю оценка
+import java.io.Serializable;
+
+public class StudentsAverageGrade implements Comparable<StudentsAverageGrade>, Serializable { //класс для сортировки объектов по полю оценка
     private final String name;
     private final float averageGrade;
 
-    public AverageStudentsGrade(String name, float averageGrade) {
+    public StudentsAverageGrade(String name, float averageGrade) {
         this.name = name;
         this.averageGrade = averageGrade;
     }
@@ -19,12 +21,12 @@ public class AverageStudentsGrade implements Comparable<AverageStudentsGrade>{ /
 
 
     @Override
-    public int compareTo(AverageStudentsGrade thatGrade) {
+    public int compareTo(StudentsAverageGrade thatGrade) {
         if(this.averageGrade < thatGrade.getAverageGrade()){
-            return 1; // не корректно, но я знаю
+            return -1;
         }
         if(this.averageGrade > thatGrade.getAverageGrade()){
-            return -1;
+            return 1;
         }
         else return name.compareTo(thatGrade.getName());
     }
