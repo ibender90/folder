@@ -16,11 +16,15 @@ public class MyBufferedReadeWriterAndFormatter {
         Reader reader = new Reader();
 
         SortedMap<StudentsAverageGrade, Set<SubjectGrade>> gradesMap = GradesToMap.createGrades(); // импортировал метод и создал мап
-        writer.writeFile(gradesMap, FILE_NAME);
+        //writer.writeFile(gradesMap, FILE_NAME);
         //reader.readFile(FILE_NAME);
         //writer.writeWithFormatter();
         //createStudentList(gradesMap,writer,BINARY_FILE_NAME);
-        showObjects(reader,BINARY_FILE_NAME);
+        //showObjects(reader,BINARY_FILE_NAME);
+        //FileUtils.printNioDetails(FILE_NAME);
+        reader.nioReadWithStream(FILE_NAME);
+        //writer.nioWriteStream("aboutCoffee.txt");
+        reader.readWithChannel("aboutCoffee.txt");
 
     }
     private static void createStudentList(SortedMap<StudentsAverageGrade, Set<SubjectGrade>> grades, Writer writer, String fileName){
