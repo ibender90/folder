@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +74,29 @@ public class Reader {
             bytesNumber = channel.read(buffer); //даю буферу новую порцию информации
         }
         channel.close();
+    }
+
+    public void writeWithRandomAccess(String fileName) throws IOException {
+        ByteBuffer mark = ByteBuffer.wrap(" MARKED AREA ".getBytes());
+        ByteBuffer buffer = ByteBuffer.allocate(10);
+        Path path = Paths.get(fileName);
+        try(FileChannel openedFile = FileChannel.open(path, StandardOpenOption.READ, StandardOpenOption.WRITE)){
+            int numBytes = 0;
+            while (buffer.hasRemaining() && numBytes != -1){
+                numBytes = openedFile.read(buffer);
+            }
+            openedFile.position(0);
+            openedFile.write(mark);
+            long size = openedFile.size();
+            openedFile.position(size/2);
+            mark.rewind();
+            openedFile.write(mark);
+            openedFile.position(size - 1);
+            mark.rewind();
+            openedFile.write(mark);
+            openedFile.write(buffer);
+        }
+
     }
 
 }

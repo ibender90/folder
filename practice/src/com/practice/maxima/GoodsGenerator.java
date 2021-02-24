@@ -9,13 +9,19 @@ public class GoodsGenerator {
 
     public static void writeWithFormatter() throws FileNotFoundException {
         Formatter formatter = new Formatter("GeneratedGoods.txt");
-        int counter = 0;
-        int firtsLine = 12_345_678;
-        while (counter < 10000) {
+        int counter1 = 0;
+        int counter2 = 0;
+        int firstLine = 12_345_678;
+        while (counter1 < 10000) {
             try {
-                formatter.format("%-8d%s%n", (firtsLine), generateName());
-                counter++;
-                firtsLine-=1200;
+                formatter.format("%-8d%s%n", (firstLine), generateName());
+                firstLine-=1;
+                counter1++;
+                counter2++;
+                if (counter2 == 2400){
+                    firstLine = firstLine/10;
+                    counter2 = 0;
+                }
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect input");
             }

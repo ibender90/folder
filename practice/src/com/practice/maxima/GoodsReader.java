@@ -21,59 +21,33 @@ public class GoodsReader {
     private String path;
     private static final int lineLength = 20;
     private RandomAccessFile file;
-    private static final byte[] TESTCODE = {54, 52, 49, 49, 51, 55, 50, 0}; //code from line 4810
+    private static final int[] TESTCODE = {49, 50, 51, 52, 48, 48, 56, 32};//{49, 50, 50, 57, 56, 56, 0, 0}; //122988 line 5005
+    private int startLine;
 
     public GoodsReader(String path) {
         this.path = path;
     }
 
-//    public static int bytesToInt(byte[] received) {
-//        ByteBuffer wrapped = ByteBuffer.wrap(received);
-//        return wrapped.getInt();
-//    }
-/*    public void compareByBytes(byte[]input) throws IOException {
-    input = new byte[]{49, 50, 51, 52, 53, 54, 55, 56};
-    readBytes(binarySearchSameLength(getCodeLength(input), 0, howManyLines()));
-    }*/
-
-
-/*    public long goTo(int num) throws IOException {
-        file = new RandomAccessFile(path, "r");
-        // переходим на num символ
-        file.seek(num);
-        // получаем текущее состояние курсора в файле
-        long pointer = file.getFilePointer();
-        file.close();
-
-        return pointer;
-    }*/
-
-/*    // читаем файл с определенного символа
-    public String readFrom(int numberSymbol) throws IOException {
-        // открываем файл для чтения
-        file = new RandomAccessFile(path, "r");
-        String res = "";
-        // ставим указатель на нужный вам символ
-        file.seek(numberSymbol);
-        int b = file.read();
-        // побитово читаем и добавляем символы в строку
-        while (b != -1) {
-            res = res + (char) b;
-
-            b = file.read();
+    public int aboveOrBeyound() throws IOException {
+        int[] codeRecievedFromSearch = readInt(searchSameLength(getCodeLength(TESTCODE)));
+        for (int i = 0; i < 8; i++) {
+            if (codeRecievedFromSearch[i] == TESTCODE[i]) {
+                continue;
+            }
+            if (codeRecievedFromSearch[i] < TESTCODE[i]) {
+                return -1; //look above
+            } else return 1; //look beyond
         }
-        file.close();
-        return res;
-    }*/
+        return 0; //same code!
+    }
 
-    public String readLine(int lineNumber) throws IOException {
+    public String readFromPosition(long position) throws IOException { //temporary
         file = new RandomAccessFile(path, "r");
         String res = "";
-        int position = (lineNumber - 1) * lineLength; //перехожу на начало строки
         file.seek(position);
-        int b = file.read();       // file.read(byte array) в скобках отступ
+        int b = file.read();
         int counter = 0;
-        while (counter != 8) {
+        while (counter != 10) {
             res = res + (char) b;
             b = file.read();
             counter++;
@@ -82,32 +56,50 @@ public class GoodsReader {
         return res;
     }
 
+    public String findCode() throws IOException {
+        int direction = 20 * aboveOrBeyound();
+        int[] codeFromFile = readInt(startLine);
+        file = new RandomAccessFile(path, "r");
+        long position = (long) (startLine - 1) * lineLength;
+        for (int i = 0; i < 7; i++) {
+            if (codeFromFile[i] == TESTCODE[i]) {
+                position += 1;
+                file.seek(position);
+                codeFromFile[i + 1] = file.read();
+                continue;
+            }
+            if (codeFromFile[i] == 48) {
+                codeFromFile[i] = 0;
+            }
+            while (codeFromFile[i] != TESTCODE[i]) {
+                file.seek((position += direction));
+                codeFromFile[i] = file.read();
+            }
+            position += 1;
+            file.seek(position);
+            codeFromFile[i + 1] = file.read();
+        }
+        return "" + readFromPosition(position+1);
+    }
 
-    public byte[] readBytes(int lineNumber) throws IOException {
+    public int[] readInt(int lineNumber) throws IOException {
         file = new RandomAccessFile(path, "r");
         int position = (lineNumber - 1) * lineLength;
         file.seek(position);
-        byte[] number = new byte[8];
-        byte a = file.readByte();
-        int counter = 0;
-        while (counter < 8) {
-            if (a != 32) {
-                number[counter] = a;
-                a = file.readByte();
-                counter++;
-            } else {
-                file.close();
-                break;
-            }
+        int[] codeArray = new int[8];
+        int nextInt = file.read();
+        for (int i = 0; i < 8; i++) {
+            codeArray[i] = nextInt;
+            nextInt = file.read();
         }
         file.close();
-        return number;
+        return codeArray;
     }
 
-    public int getCodeLength(byte[] code) {
+    public int getCodeLength(int[] code) {
         int codeLength = 0;
-        for (byte everyByte : code) {
-            if (everyByte != 0) {
+        for (int everyByte : code) {
+            if (everyByte != 32) {
                 codeLength++;
             }
         }
@@ -119,55 +111,27 @@ public class GoodsReader {
         return (int) (file.length() / 20); // каждая строка вмещает 20 байт
     }
 
-    public int smallestCodeLength() throws IOException {
-        file = new RandomAccessFile(path, "r");
-        return getCodeLength(readBytes((int) (file.length() / 20))); // каждая строка вмещает 20 байт
-    }
-
-/*    public void printLineNumber(int recievedCodeLength) throws IOException {
-        System.out.println(binarySearchSameLength(recievedCodeLength, 0, 10000));
-    }*/
-
-    // получаю код в байтах, например [54, 52, 49, 49, 51, 55, 50, 0] он хранится в строке 4810
-// бинарный поиск будет переходить по массиву строк, и искать строку нужной длины
-//                                              code length  0       how many lines
-    public int searchSameLength(int key) throws IOException {
-        int high = howManyLines();
-        int low = 0;
+    public int searchSameLength(int requiredLength) throws IOException {
+        int upperBoarder = 0;
+        int lowerBoarder = howManyLines();
         int lineNumber = 1;
-        while (low <= smallestCodeLength()) {
-            int mid = (low + high) / 2;
-            if (getCodeLength(readBytes(mid)) < key) {
-                low = mid + 1;
-            } else if (getCodeLength(readBytes(mid)) > key) {
-                high = mid - 1;
-            } else if (getCodeLength(readBytes(mid)) == key) {
+        startLine = 1;
+
+        while ((upperBoarder <= lowerBoarder) && (requiredLength != 8)) { // 8ми значные коды будем искать с начала файла
+            int mid = (lowerBoarder + upperBoarder) / 2;
+            int foundLength = getCodeLength(readInt(mid));
+
+            if (foundLength < requiredLength) {
+                lowerBoarder = mid - 1;
+            } else if (foundLength > requiredLength) {
+                upperBoarder = mid + 1;
+            } else if (foundLength == requiredLength) {
                 lineNumber = mid;
                 break;
             }
         }
+        startLine = lineNumber;
         return lineNumber;
     }
-
-/*    public int higherOrLower(int lineNumber) throws IOException {
-        if (Arrays.equals(readBytes(lineNumber), TESTCODE)) {
-            return 0;
-        } else if (Arrays.compare(readBytes(lineNumber), TESTCODE) < 0) {
-            return -1;
-        }
-        return 1; //current code is located above entered
-    }*/
-
-/*    public void nioReadWithBuffer(String fileName) throws IOException {
-        Path path = Paths.get(fileName);
-        //Charset charset = Charset.forName("UTF-8"); // пример того, как дать понять джаве, если формат записей в файле отличается от стандарта
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String c;
-            while ((c = reader.readLine()) != null) {
-                System.out.println(c);
-            }
-        }
-    }*/
-
 
 }
