@@ -14,8 +14,10 @@ package com.practice.maxima;
          а вот диск у нее большой, туда может зайти база максимы три икса на дохериллион товаров, и товары там будут искать быстро и много во время инвентуры.
         Направления изыскания: побайтовое считывание, внутренний указатель позиции в файле, бинарный поиск.*/
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
 
 public class GoodsReader {
     private String path;
@@ -24,8 +26,9 @@ public class GoodsReader {
     private static final int[] TESTCODE = {49, 50, 51, 52, 48, 48, 56, 32};//{49, 50, 50, 57, 56, 56, 0, 0}; //122988 line 5005
     private int startLine;
 
-    public GoodsReader(String path) {
+    public GoodsReader(String path) throws FileNotFoundException {
         this.path = path;
+        file = new RandomAccessFile(path, "r");
     }
 
     public int aboveOrBeyound() throws IOException {
@@ -42,7 +45,6 @@ public class GoodsReader {
     }
 
     public String readFromPosition(long position) throws IOException { //temporary
-        file = new RandomAccessFile(path, "r");
         String res = "";
         file.seek(position);
         int b = file.read();
@@ -52,14 +54,26 @@ public class GoodsReader {
             b = file.read();
             counter++;
         }
-        file.close();
         return res;
+    }
+
+    public void convertToString(int lineNumber) throws IOException {
+        int position = (lineNumber - 1) * lineLength;
+        file.seek(position);
+        byte[] codeArray = new byte[8];
+        byte nextByte = file.readByte();
+        for (int i = 0; i < 8; i++) {
+            codeArray[i] = nextByte;
+            nextByte = file.readByte();
+        }
+        ByteBuffer wrapped = ByteBuffer.wrap(codeArray);
+        int num = wrapped.getInt();
+        System.out.println(num);
     }
 
     public String findCode() throws IOException {
         int direction = 20 * aboveOrBeyound();
         int[] codeFromFile = readInt(startLine);
-        file = new RandomAccessFile(path, "r");
         long position = (long) (startLine - 1) * lineLength;
         for (int i = 0; i < 7; i++) {
             if (codeFromFile[i] == TESTCODE[i]) {
@@ -79,11 +93,12 @@ public class GoodsReader {
             file.seek(position);
             codeFromFile[i + 1] = file.read();
         }
-        return "" + readFromPosition(position+1);
+        String result = "" + readFromPosition(position+1);
+        file.close();
+        return result;
     }
 
     public int[] readInt(int lineNumber) throws IOException {
-        file = new RandomAccessFile(path, "r");
         int position = (lineNumber - 1) * lineLength;
         file.seek(position);
         int[] codeArray = new int[8];
@@ -92,7 +107,6 @@ public class GoodsReader {
             codeArray[i] = nextInt;
             nextInt = file.read();
         }
-        file.close();
         return codeArray;
     }
 
@@ -107,7 +121,6 @@ public class GoodsReader {
     }
 
     public int howManyLines() throws IOException {
-        file = new RandomAccessFile(path, "r");
         return (int) (file.length() / 20); // каждая строка вмещает 20 байт
     }
 
