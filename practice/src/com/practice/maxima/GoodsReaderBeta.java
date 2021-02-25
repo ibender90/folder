@@ -11,14 +11,14 @@ public class GoodsReaderBeta {
         file = new RandomAccessFile(path, "r");
     }
 
-    private int howManyLines() throws IOException {
-        return (int) (file.length() / 20);
-    }
-
     private String readLine(int lineNumber) throws IOException {
         int position = (lineNumber - 1) * 20;
         file.seek(position);
         return file.readLine();
+    }
+
+    private int getCode(int fromLineNr) throws IOException {
+        return getInteger(readLine(fromLineNr));
     }
 
     private int getInteger(String inputLine) {
@@ -26,11 +26,7 @@ public class GoodsReaderBeta {
         return Integer.parseInt(code);
     }
 
-    private int giveCode(int fromLineNr) throws IOException {
-        return getInteger(readLine(fromLineNr));
-    }
-
-    private String giveProductName(int fromLineNr) throws IOException {
+    private String getProductName(int fromLineNr) throws IOException {
         return readLine(fromLineNr).substring(8, 18);
     }
 
@@ -41,7 +37,7 @@ public class GoodsReaderBeta {
         try {
             while ((upperBoarder <= lowerBoarder)) {
                 currentLine = (lowerBoarder + upperBoarder) / 2;
-                int foundCode = giveCode(currentLine);
+                int foundCode = getCode(currentLine);
                 if (foundCode < codeFromScanner) {
                     lowerBoarder = currentLine - 1;
                 } else if (foundCode > codeFromScanner) {
@@ -50,12 +46,15 @@ public class GoodsReaderBeta {
                     break;
                 }
             }
-            if (giveCode(currentLine) == codeFromScanner) {
-                return giveProductName(currentLine);
+            if (getCode(currentLine) == codeFromScanner) {
+                return getProductName(currentLine);
             } else return "Code not found";
         } finally {
             file.close();
         }
     }
 
+    private int howManyLines() throws IOException {
+        return (int) (file.length() / 20);
+    }
 }
