@@ -31,7 +31,7 @@ public class GoodsReader {
         file = new RandomAccessFile(path, "r");
     }
 
-    public int aboveOrBeyound() throws IOException {
+    private int aboveOrBeyound() throws IOException {
         int[] codeRecievedFromSearch = readInt(searchSameLength(getCodeLength(TESTCODE)));
         for (int i = 0; i < 8; i++) {
             if (codeRecievedFromSearch[i] == TESTCODE[i]) {
@@ -44,7 +44,7 @@ public class GoodsReader {
         return 0; //same code!
     }
 
-    public String readFromPosition(long position) throws IOException { //temporary
+    private String readFromPosition(long position) throws IOException { //temporary
         String res = "";
         file.seek(position);
         int b = file.read();
@@ -57,15 +57,8 @@ public class GoodsReader {
         return res;
     }
 
-    public void convertToString(int lineNumber) throws IOException {
-        int position = (lineNumber - 1) * lineLength;
-        file.seek(position);
-        byte[] codeArray = new byte[8];
-        byte nextByte = file.readByte();
-        for (int i = 0; i < 8; i++) {
-            codeArray[i] = nextByte;
-            nextByte = file.readByte();
-        }
+    public void convertToString() throws IOException {
+        byte[] codeArray = {49, 50, 51, 52, 48, 48, 56, 32};
         ByteBuffer wrapped = ByteBuffer.wrap(codeArray);
         int num = wrapped.getInt();
         System.out.println(num);

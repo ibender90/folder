@@ -9,6 +9,6 @@ public class Tester {
         GoodsReader reader = new GoodsReader("GeneratedGoods.txt");
         System.out.println(Arrays.toString(reader.readInt(2720)));
         //System.out.println(reader.findCode());
-        reader.convertToString(1);
+        reader.convertToString();
     }
 }
