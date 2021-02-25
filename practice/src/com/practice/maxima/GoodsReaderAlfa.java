@@ -19,14 +19,14 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
-public class GoodsReader {
+public class GoodsReaderAlfa {
     private String path;
     private static final int lineLength = 20;
     private RandomAccessFile file;
     private static final int[] TESTCODE = {49, 50, 51, 52, 48, 48, 56, 32};//{49, 50, 50, 57, 56, 56, 0, 0}; //122988 line 5005
     private int startLine;
 
-    public GoodsReader(String path) throws FileNotFoundException {
+    public GoodsReaderAlfa(String path) throws FileNotFoundException {
         this.path = path;
         file = new RandomAccessFile(path, "r");
     }
