@@ -2,7 +2,7 @@ package com.practice.code_scanner;
 
 import java.util.Scanner;
 
-public class ProductScanner {
+public class CodeScanner {
 
     public static int checkCode() {
         Scanner scanner = new Scanner(System.in);

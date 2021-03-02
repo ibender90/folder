@@ -5,7 +5,7 @@ import java.util.Formatter;
 import java.util.InputMismatchException;
 import java.util.Random;
 
-public class GoodsGenerator {
+public class CodeAndNameGenerator {
 
     public static void writeWithFormatter() throws FileNotFoundException {
         Formatter formatter = new Formatter("GeneratedGoods.txt");
