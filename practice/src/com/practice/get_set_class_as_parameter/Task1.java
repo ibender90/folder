@@ -1,6 +1,6 @@
 package com.practice.get_set_class_as_parameter;
 
-import com.practice.fifth.Motorcycle;
+import com.practice.get_set_class_as_parameter.fifth.Motorcycle;
 
 //В классах Автомобиль и Мотоцикл реализовать два метода:
 //        info () - выводит в консоль строку “Это автомобиль” (или “Это мотоцикл”),

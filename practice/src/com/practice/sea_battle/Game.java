@@ -61,7 +61,7 @@ public class Game {
                 System.out.println("enter 4 to create a airplane carrier");
                 try {
                     int checkInput = scanner.nextInt();
-                    if (checkInput > 0 && checkInput < 5) { // проверяю, что введено число от 1 до 4 включительно
+                    if (checkInput > 0 && checkInput < 5) {
                         shipType = checkInput;
                         incorrectInput = false;
                     } else incorrectInput = true;
@@ -71,20 +71,19 @@ public class Game {
                     scanner.nextLine();
                 }
             } while (incorrectInput);
-            Ship testShip = Ship.createShip(shipType); // создаю корабль нужного размера без определённых координат
-            if (testShip.getShipSize() == player.checkFleet(testShip)) { //если размер созданного корабля совпадает с максимальным количеством
-                System.out.println("fleet can not contain more vessels of this size");  //если кораблей такого размера уже слишком много во флоте игрока, то он не добавляется
+            Ship testShip = Ship.createShip(shipType);
+            if (testShip.getShipSize() == player.checkFleet(testShip)) {
+                System.out.println("fleet can not contain more vessels of this size");
                 continue;
             } else testShip.getInstruction();
-            testShip.setCoordinates(testShip.defineCoordinates()); // вводим координаты для нового корабля
-            if (testShip.correctShape()) { // если форма корабля соответствует правилам
-                if (field.addToField(testShip)) { // если удалось уместить корабль на поле
-                    player.addToFleet(testShip);   // добавляем его во флот игрока
-                    field.generateBlockedArea(testShip);  // генерируем на поле зону, куда нельзя теперь добавить корабль
-                    field.printField(); //
+            testShip.setCoordinates(testShip.defineCoordinates());
+            if (testShip.correctShape()) {
+                if (field.addToField(testShip)) {
+                    player.addToFleet(testShip);
+                    field.generateBlockedArea(testShip);
+                    field.printField();
                 } else System.out.println("this coordinates can not be used");
             } else System.out.println("wrong shape of the ship");
-           // System.out.println(player.toString());
         } while (!player.fleetCreated());
     }
 

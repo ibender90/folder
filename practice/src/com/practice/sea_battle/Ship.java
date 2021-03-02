@@ -76,7 +76,7 @@ public class Ship {
         return null;
     }
 
-    public boolean correctShape() { // когда корабль не является одной целой линией на карте, расположеной вертикально или горизонтально
+    public boolean correctShape() {
         boolean correct = false;
         switch (shipSize) {
             case TINY:
@@ -111,12 +111,12 @@ public class Ship {
 
     public int[] defineCoordinates() {
         Scanner scanner = new Scanner(System.in);
-        int[] position = new int[this.shipSize.getLives() * 2]; // одна клетка имеет две координаты, для разного размера корабля - разный размер массива содержащий координаты на поле
+        int[] position = new int[this.shipSize.getLives() * 2];
         boolean incorrectInput;
         do {
             incorrectInput = false;
             try {
-                String[] line = scanner.nextLine().split(",");    // сначала проверка, на правильность ввода названия координаты х y
+                String[] line = scanner.nextLine().split(",");
                 for (int i = 0; i < this.shipSize.getLives() * 2; i += 2) {
                     if (!line[i].startsWith("x")) {
                         System.out.println("wrong coordinate name, check x");

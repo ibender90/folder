@@ -8,12 +8,12 @@ public class Field {
     }
 
     public boolean addToField(Ship ship) {
-        for (int i = 0; i < ship.getCoordinates().length - 1; i += 2) { //сначала поверяю, что каждая кретка поля свободна
+        for (int i = 0; i < ship.getCoordinates().length - 1; i += 2) {
             if (!battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]].equals(Icon.EMPTY.icon))
                 return false;
         }
-        for (int i = 0; i < ship.getCoordinates().length - 1; i += 2) { // затем заполняю эти клетки строками со значком корабля
-            battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]] = Icon.SHIP.icon;  // добавляет корабль на карту
+        for (int i = 0; i < ship.getCoordinates().length - 1; i += 2) {
+            battleField[ship.getCoordinates()[i + 1]][ship.getCoordinates()[i]] = Icon.SHIP.icon;
         }
         return true;
     }
@@ -27,56 +27,56 @@ public class Field {
         }
     }
 
-    public void generateBlockedArea(Ship ship) { // создаст зону вокруг нового корабля в которую нельзя будет поставить новые корабли
+    public void generateBlockedArea(Ship ship) {
         int electricityWasted = 0;
         for (int i = 0; i <= ship.getCoordinates().length - 1; i += 2) {
             int x = ship.getCoordinates()[i];
             int y = ship.getCoordinates()[i + 1];
             try {
-                if (this.getBattleField()[y][x - 1].equals(Icon.EMPTY.icon)) // vertical left line
+                if (this.getBattleField()[y][x - 1].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y][x - 1] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
-                if (this.getBattleField()[y][x + 1].equals(Icon.EMPTY.icon)) // vertical right line
+                if (this.getBattleField()[y][x + 1].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y][x + 1] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
-                if (this.getBattleField()[y - 1][x - 1].equals(Icon.EMPTY.icon)) // horizontal top left corner
+                if (this.getBattleField()[y - 1][x - 1].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y - 1][x - 1] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
-                if (this.getBattleField()[y + 1][x - 1].equals(Icon.EMPTY.icon)) // horizontal bottom  left corner
+                if (this.getBattleField()[y + 1][x - 1].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y + 1][x - 1] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
-                if (this.getBattleField()[y - 1][x + 1].equals(Icon.EMPTY.icon)) // horizontal top right line
+                if (this.getBattleField()[y - 1][x + 1].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y - 1][x + 1] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
 
-                if (this.getBattleField()[y + 1][x + 1].equals(Icon.EMPTY.icon)) // horizontal bottom rigth corner
+                if (this.getBattleField()[y + 1][x + 1].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y + 1][x + 1] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
-                if (this.getBattleField()[y + 1][x].equals(Icon.EMPTY.icon)) // horizontal top line
+                if (this.getBattleField()[y + 1][x].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y + 1][x] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;
             }
             try {
-                if (this.getBattleField()[y - 1][x].equals(Icon.EMPTY.icon)) // horizontal bottom line
+                if (this.getBattleField()[y - 1][x].equals(Icon.EMPTY.icon))
                     this.getBattleField()[y - 1][x] = Icon.BLOCKED_AREA.icon;
             } catch (ArrayIndexOutOfBoundsException e) {
                 electricityWasted++;

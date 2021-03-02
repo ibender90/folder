@@ -22,7 +22,7 @@ public class Player {
     }
 
     public boolean fleetCreated() {
-        return this.fleet.size() == 10; // should be 10
+        return this.fleet.size() == 10;
     }
 
     public Ship.ShipSize checkFleet(Ship ship) {
@@ -75,7 +75,7 @@ public class Player {
             do {
                 incorrectInput = false;
                 try {
-                    String[] line = scanner.nextLine().split(",");    // сначала проверка, на правильность ввода названия координаты х y
+                    String[] line = scanner.nextLine().split(",");
                     if (!line[0].startsWith("x")) {
                         System.out.println("wrong coordinate name, check x");
                         incorrectInput = true;
