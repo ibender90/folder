@@ -2,19 +2,20 @@ package com.practice.lambdas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 @FunctionalInterface
-interface MyFirstFuctionalInterface{
+interface MyFirstFunctionalInterface {
     double process(int element);
     // абстрактный метод принимает целое число, возвращает число с дробной частью
 }
 @FunctionalInterface
-interface MyInterfaceWithGererics<T extends Number> {
+interface MyInterfaceWithGenerics<T extends Number> {
     double process(T element);
     // T  = тип который наследуется от Number, например Integer, Double, Float, Long
 }
 
-public class LambdaAndFunctionalnterface {
+public class LambdaAndFunctionalInterface {
     public static void main(String[] args) {
         List<Integer> intlist = new ArrayList<>();
         intlist.add(1);
@@ -39,18 +40,20 @@ public class LambdaAndFunctionalnterface {
 
     }
 
-    private static void simpleProcessing(List<Integer> list, MyFirstFuctionalInterface processor){
+    private static void simpleProcessing(List<Integer> list, MyFirstFunctionalInterface processor){
         for(Integer i : list){
             System.out.println(processor.process(i));
             // каждый элемент из списка будет передан в метод интерфейса, который реализован в лямбда выражении
         }
     }
 
-    private static <T extends Number> void processWithGenerics(List<T> list, MyInterfaceWithGererics processor){
+    private static <T extends Number> void processWithGenerics(List<T> list, MyInterfaceWithGenerics processor){
         for(Number i : list) {
             System.out.println(processor.process(i));
         }
     }
+
+
 
 
 }
