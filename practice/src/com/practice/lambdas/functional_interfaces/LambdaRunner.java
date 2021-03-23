@@ -2,7 +2,6 @@ package com.practice.lambdas.functional_interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -30,6 +29,8 @@ public class LambdaRunner {
 
         BinaryOperator<Integer> summator = (x1,x2) -> x1+x2; //summator = combiner
         System.out.println("sum of salaries " + testBinary(workers, 0, Employee::getSalary, summator));
+
+        Timer.measureTime(() -> calcSum(workers, x -> x.getSalary()));  // использую интерфейс таймер
 
         BinaryOperator<Integer> maxFinder = Math::max;
         System.out.println("Max age "+ testBinary(people, 0, Person::getAge, maxFinder));
