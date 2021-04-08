@@ -47,7 +47,6 @@ public class StreamRunner {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
-
     }
 
     private static void teastStreamFromFile() throws IOException {

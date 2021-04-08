@@ -59,6 +59,7 @@ public class HigherOrderFunctionExample {
         Function<T, T> result = Function.identity();
         for (Function<T, T> f : functions) {
             result = result.andThen(f);
+            //сначала выполняю первую функцию переданную в метод, затем остальные
         }
         return result;
     }
