@@ -1,0 +1,32 @@
+======================================
+Student: Anton average grade: 3.1666667
+Subject: math, grade: 2
+Subject: biology, grade: 3
+Subject: music, grade: 4
+Subject: physics, grade: 2
+Subject: sport, grade: 5
+Subject: literature, grade: 3
+======================================
+Student: Kos average grade: 3.8333333
+Subject: math, grade: 4
+Subject: biology, grade: 3
+Subject: physics, grade: 3
+Subject: music, grade: 5
+Subject: sport, grade: 4
+Subject: literature, grade: 4
+======================================
+Student: Artjom average grade: 4.1666665
+Subject: math, grade: 3
+Subject: physics, grade: 3
+Subject: music, grade: 5
+Subject: biology, grade: 5
+Subject: sport, grade: 5
+Subject: literature, grade: 4
+======================================
+Student: Olga average grade: 4.1666665
+Subject: math, grade: 5
+Subject: physics, grade: 5
+Subject: music, grade: 5
+Subject: biology, grade: 4
+Subject: literature, grade: 3
+Subject: sport, grade: 3
