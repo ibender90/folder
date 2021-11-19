@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All people</title>
+</head>
+<body>
+<div th:each="person : ${people}">
+    //беру из модели people каждый объект
+    //аналог for:each thymeleaf
+    <a th:href="@{/second/people/{id}(id=${person.getId())}" th:text="${person.getName()}">placeToPasteText</a>
+    //беру ид у каждого объекта и создаю ссылку  -> текст ссылки =       получаю имя каждого объекта
+</div>
+</body>
+</html>
